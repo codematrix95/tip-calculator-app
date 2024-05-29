@@ -1,0 +1,11 @@
+.grid-calc {
+    background-color: $white;
+    color: $grayishcyan;
+    padding: 0px 10px;
+    @media (min-width: 374px) {
+        max-height: 432px;
+    }
+    @media (min-width: 0px) {
+        max-height: 462px;
+    }
+}

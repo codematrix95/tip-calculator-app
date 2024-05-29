@@ -1,0 +1,70 @@
+.btns {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    @include tablet {
+        gap: 10px;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    @include desktop {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    button {
+        border: none;
+        outline: none;
+        font-size: 24px;
+        border-radius: 6px;
+        &.inactive {
+            background-color: $verydarkcyan;
+            color: $white;
+            &:hover {
+                cursor: pointer;
+                background-color: $lightstrongcyan;
+                color: $verydarkcyan;
+            }
+        }
+        &.active {
+            background-color: $strongcyan;
+            color: $verydarkcyan;
+        }
+    }
+    input {
+        background-color: $verylightgrayishcyan;
+        color: $verydarkcyan;
+        padding: 7px;
+        border-radius: 4px;
+        border: none;
+        text-align: right;
+        padding-right: 8px;
+        font-size: 24px;
+        border-radius: 6px;
+        padding-right: 16px;
+        @include tablet {
+            font-size: 20px;
+        }
+        @include desktop {
+            font-size: 24px;
+            border-radius: 6px;
+            padding-right: 16px;
+        }
+        &.active {
+            outline: auto;
+            outline-color: $strongcyan;
+            caret-color: $strongcyan;
+        }
+        &.inactive {
+            outline: none;
+            &:hover {
+                outline: auto;
+                outline-color: $strongcyan;
+                cursor: pointer;
+            }
+        }
+        &::placeholder {
+            color: $grayishcyan;
+        }
+    }
+}

@@ -1,0 +1,8 @@
+.bill {
+    display: grid;
+    align-items: center;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    @include bill-people-inputs;
+}
+

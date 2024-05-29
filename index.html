@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+Osmanya&family=Space+Mono:wght@700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="grid-1">
+            <h1><img src="images/logo.svg" alt="" /></h1>
+            <div class="grid-2">
+                <div class="grid-calc">
+                    <div class="bill">
+                        <label for="bill">Bill</label>
+                        <span id="cantBeZeroBill" class="inactive"
+                            >Can't be zero</span
+                        >
+                        <input
+                            type="text"
+                            id="bill"
+                            class="inactive"
+                            name="bill"
+                            placeholder="0"
+                            autocomplete="off"
+                        />
+                        <img src="images/icon-dollar.svg" alt="" />
+                    </div>
+                    <div class="tip">
+                        <div>Select Tip %</div>
+                        <form id="tipBtns" class="btns" autocomplete="off">
+                            <button type="button" value="5" class="inactive">
+                                5%
+                            </button>
+                            <button type="button" value="10" class="inactive">
+                                10%
+                            </button>
+                            <button type="button" value="15" class="inactive">
+                                15%
+                            </button>
+                            <button type="button" value="25" class="inactive">
+                                25%
+                            </button>
+                            <button type="button" value="50" class="inactive">
+                                50%
+                            </button>
+                            <input
+                                type="text"
+                                value=""
+                                placeholder="Custom"
+                                id="custom"
+                                class="inactive"
+                                size="6"
+                            />
+                        </form>
+                    </div>
+
+                    <div class="people">
+                        <label for="people">Number of people</label>
+                        <span id="cantBeZeroPeople" class="inactive"
+                            >Can't be zero</span
+                        >
+                        <input
+                            type="text"
+                            id="people"
+                            class="inactive"
+                            name="people"
+                            placeholder="0"
+                            autocomplete="off"
+                        />
+                        <img src="images/icon-person.svg" alt="" />
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <p>
+                        <span>
+                            Tip Amount <br />
+                            / person</span
+                        >
+                        <span id="tipTotal">$0.00</span>
+                    </p>
+                    <p>
+                        <span>
+                            Total <br />
+                            / person</span
+                        >
+                        <span id="personTotal">$0.00</span>
+                    </p>
+                    <p class="reset">
+                        <button type="button" id="reset" value="">RESET</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="/main.js" ></script>
+</html>

@@ -1,0 +1,73 @@
+.amount {
+    background-color: $verydarkcyan;
+    color: $grayishcyan;
+    display: grid;
+    border-radius: 16px;
+    padding: 24px;
+    @include mobile {
+        max-height: 222px;
+    }
+    @include tablet {
+        grid-template-rows: 1fr 1fr 2fr;
+        padding: 24px;
+    }
+    @include desktop {
+        grid-template-rows: 1fr 1fr 2fr;
+        padding: 36px;
+    }
+    p:nth-child(-n + 2) {
+        cursor: default;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+
+        @include tablet {
+            min-height: 71.5px;
+        }
+        span {
+            white-space: nowrap;
+        }
+        span:first-child {
+            font-size: 16px;
+            padding: 5px 0px;
+        }
+        span:first-child::first-line {
+            color: $white;
+        }
+        span:last-child {
+            color: $strongcyan;
+            font-size: 36px;
+
+            @include tablet {
+                font-size: 48px;
+            }
+            @include desktop {
+                font-size: 48px;
+            }
+        }
+    }
+    p:nth-child(3) {
+        container-type: inline-size;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        button {
+            font-size: 1.75cqh;
+            background-color: $strongcyan;
+            border: none;
+            color: $verydarkcyan;
+            padding: 8px;
+            font-size: 20px;
+            border-radius: 6px;
+            @media (hover: hover) {
+                &:hover {
+                    background-color: $lightstrongcyan;
+                    color: $verydarkcyan;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

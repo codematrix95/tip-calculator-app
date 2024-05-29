@@ -1,0 +1,5 @@
+.people {
+    display: grid;
+    align-items: center;
+    @include bill-people-inputs;
+}
