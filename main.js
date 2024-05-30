@@ -71,6 +71,39 @@ billInput.onkeyup = (e) => {
     }
 };
 
+tipBtns.ontouchstart = (e) => {
+    percent = e.target.value;
+    activeBtn = e.target;
+
+    if (typeof previouslyActiveBtn == "undefined") {
+        previouslyActiveBtn = e.target;
+    }
+
+    if (activeBtn.className == "inactive") {
+        activeBtn.className = "active";
+        console.log(previouslyActiveBtn);
+    }
+
+    if (
+        percent > previouslyActiveBtn.value ||
+        percent < previouslyActiveBtn.value
+    ) {
+        previouslyActiveBtn.className = "inactive";
+    }
+
+    if (bill && people && percent) {
+        calcTip();
+    }
+
+    e.target.ontouchmove = () => {
+        previouslyActiveBtn = e.target;
+        if (bill && people && percent) {
+            calcTip();
+        }
+    };
+
+}
+
 tipBtns.onclick = (e) => {
     percent = e.target.value;
     activeBtn = e.target;
