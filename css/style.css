@@ -151,6 +151,7 @@ body {
   cursor: pointer;
   background-color: hsl(330, 100%, 96%);
   outline: auto;
+  outline-style: solid;
   outline-color: hsl(26, 100%, 50%);
   caret-color: hsl(26, 100%, 50%);
 }
@@ -161,6 +162,7 @@ body {
 @media (hover: hover) {
   .bill input.inactive:hover {
     outline: auto;
+    outline-style: solid;
     outline-color: hsl(172, 67%, 45%);
     cursor: pointer;
   }
@@ -262,6 +264,7 @@ body {
 }
 .btns input.active {
   outline: auto;
+  outline-style: solid;
   outline-color: hsl(172, 67%, 45%);
   caret-color: hsl(172, 67%, 45%);
 }
@@ -270,6 +273,7 @@ body {
 }
 .btns input.inactive:hover {
   outline: auto;
+  outline-style: solid;
   outline-color: hsl(172, 67%, 45%);
   cursor: pointer;
 }
@@ -315,6 +319,7 @@ body {
   cursor: pointer;
   background-color: hsl(330, 100%, 96%);
   outline: auto;
+  outline-style: solid;
   outline-color: hsl(26, 100%, 50%);
   caret-color: hsl(26, 100%, 50%);
 }
@@ -325,6 +330,7 @@ body {
 @media (hover: hover) {
   .people input.inactive:hover {
     outline: auto;
+    outline-style: solid;
     outline-color: hsl(172, 67%, 45%);
     cursor: pointer;
   }

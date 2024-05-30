@@ -57,6 +57,7 @@ $screen-breakpoints: (
             cursor: pointer;
             background-color: $verylightpink;
             outline: auto;
+            outline-style: solid;
             outline-color: $burntorange;
             caret-color: $burntorange;
         }
@@ -66,6 +67,7 @@ $screen-breakpoints: (
             @media (hover: hover) {
                 &:hover {
                     outline: auto;
+                    outline-style: solid;
                     outline-color: $strongcyan;
                     cursor: pointer;
                 }
