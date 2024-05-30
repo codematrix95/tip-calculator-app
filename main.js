@@ -19,6 +19,8 @@ let tip;
 let totalPerPerson;
 
 // tipBtns
+let a = [];
+
 let previouslyActiveBtn;
 let activeBtn;
 
@@ -71,36 +73,30 @@ billInput.onkeyup = (e) => {
     }
 };
 
-tipBtns.onmouseup = (e) => {
+tipBtns.onclick = (e) => {
     percent = e.target.value;
-    activeBtn = e.target;
 
-    if (typeof previouslyActiveBtn == "undefined") {
-        previouslyActiveBtn = e.target;
+    let index = Array.from(tipBtns.children).indexOf(e.target);
+
+    if (e.target.className === "inactive") {
+        e.target.className = "active";
+    }
+    if (a.length === 2) {
+        a.splice(0, 1);
     }
 
-    if (activeBtn.className == "inactive") {
-        activeBtn.className = "active";
-        console.log(previouslyActiveBtn);
-    }
+    a.push(index);
 
-    if (
-        percent > previouslyActiveBtn.value ||
-        percent < previouslyActiveBtn.value
-    ) {
-        previouslyActiveBtn.className = "inactive";
+    if (a.length > 1) {
+        if (a[0] === a[1]) {
+            return;
+        } else {
+            tipBtns.children[a[0]].className = "inactive";
+        }
     }
-
     if (bill && people && percent) {
         calcTip();
     }
-
-    e.target.onblur = () => {
-        previouslyActiveBtn = e.target;
-        if (bill && people && percent) {
-            calcTip();
-        }
-    };
 };
 
 custom.onmousedown = (e) => {
