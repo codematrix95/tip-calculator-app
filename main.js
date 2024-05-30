@@ -20,8 +20,6 @@ let totalPerPerson;
 
 // tipBtns
 let a = [];
-
-let previouslyActiveBtn;
 let activeBtn;
 
 // inputState && isValid
@@ -75,6 +73,7 @@ billInput.onkeyup = (e) => {
 
 tipBtns.onclick = (e) => {
     percent = e.target.value;
+    activeBtn = e.target
 
     let index = Array.from(tipBtns.children).indexOf(e.target);
 
