@@ -133,6 +133,10 @@ to both elements.
 }
 ```
 
+This was probably the most challenging part of the code because it was very difficult to limit the users
+input in a dynamic way but as I kept breaking my code I realized I could use arrays to keep track of my state
+and dynamically change those arrays based on the value of the input with 2 reusuable functions
+
 ```js
 const proudOfThisFunc = () => {
     console.log("🎉");

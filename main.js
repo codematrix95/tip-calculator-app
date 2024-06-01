@@ -1,3 +1,4 @@
+// ID's
 const billInput = document.getElementById("bill");
 const peopleInput = document.getElementById("people");
 const custom = document.getElementById("custom");
@@ -9,11 +10,12 @@ const peopleTotal = document.getElementById("personTotal");
 const cantBeZeroBill = document.getElementById("cantBeZeroBill");
 const cantBeZeroPeople = document.getElementById("cantBeZeroPeople");
 
-// calcTip
+// calcTip values
 let bill;
 let people;
 let percent = 0;
 
+// calcTip calculation
 let billDivided;
 let tip;
 let totalPerPerson;
@@ -40,9 +42,7 @@ billInput.onmousedown = (e) => {
 
 billInput.onmouseup = (e) => {
     e.target.removeAttribute("style");
-    cursorEnd(e);
     inputState(e, 6, 3);
-    console.log(maxLength);
 };
 
 billInput.onblur = () => {
@@ -51,8 +51,6 @@ billInput.onblur = () => {
 
 billInput.onkeydown = (e) => {
     validInput(e, 6);
-    console.log(keyPress.length);
-    console.log(maxLength);
 };
 
 billInput.onkeyup = (e) => {
@@ -104,14 +102,11 @@ custom.onmousedown = (e) => {
 
 custom.onmouseup = (e) => {
     e.target.removeAttribute("style");
-    cursorEnd(e);
     inputState(e, 3, 3);
-    console.log(maxLength);
 };
 
 custom.onblur = () => {
     keyPress = [];
-    console.log(keyPress + "custom");
 };
 
 custom.onkeydown = (e) => {
@@ -135,7 +130,6 @@ peopleInput.onmousedown = (e) => {
 
 peopleInput.onmouseup = (e) => {
     e.target.removeAttribute("style");
-    cursorEnd(e);
     inputState(e, 3, 0);
 };
 
@@ -192,10 +186,6 @@ const calcTip = () => {
         style: "currency",
         currency: "USD",
     }).format(totalPerPerson);
-};
-
-const cursorEnd = (e) => {
-    e.target.selectionStart = e.target.value.length;
 };
 
 const inputState = (e, inputLength, decPlaces) => {
@@ -267,7 +257,6 @@ const validInput = (e, inputLength) => {
             isLastCharDec = false;
         }
     }
-    console.log(keyPress);
 };
 
 const reset = () => {
