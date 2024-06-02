@@ -283,6 +283,9 @@ const reset = () => {
     peopleInput.value = "";
     custom.value = "";
 
+    tipTotal.removeAttribute("style");
+    peopleTotal.removeAttribute("style");
+
     bill = 0;
     people = 0;
     percent = 0;
