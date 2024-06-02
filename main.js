@@ -21,7 +21,7 @@ let tip;
 let totalPerPerson;
 
 // tipBtns
-let a = [];
+let prevBtn = [];
 let activeBtn;
 
 // inputState && isValid
@@ -35,6 +35,20 @@ let keyPress = [];
 let fontSizesL = ["48px", "36px", "32px", "28px"];
 let fontSizesM = ["36px", "32px", "28px", "24px"];
 let fontSizesS = ["36px", "30px", "24px", "20px", "18px"];
+
+let arrows = {
+    ArrowUp: null,
+    ArrowDown: null,
+    ArrowRight: null,
+    ArrowLeft: null,
+    Tab: null,
+};
+
+document.body.onkeydown = (e) => {
+    if (e.key in arrows) {
+        console.log(e.key);
+    }
+};
 
 billInput.onmousedown = (e) => {
     e.target.style.caretColor = "transparent";
@@ -55,7 +69,7 @@ billInput.onkeydown = (e) => {
 
 billInput.onkeyup = (e) => {
     bill = e.target.value;
-    console.log(bill);
+    console.log(keyPress);
 
     if (bill < 0.01 && keyPress.length !== 0) {
         cantBeZeroBill.className = "active";
@@ -71,24 +85,24 @@ billInput.onkeyup = (e) => {
 
 tipBtns.onclick = (e) => {
     percent = e.target.value;
-    activeBtn = e.target
+    activeBtn = e.target;
 
     let index = Array.from(tipBtns.children).indexOf(e.target);
 
     if (e.target.className === "inactive") {
         e.target.className = "active";
     }
-    if (a.length === 2) {
-        a.splice(0, 1);
+    if (prevBtn.length === 2) {
+        prevBtn.splice(0, 1);
     }
 
-    a.push(index);
+    prevBtn.push(index);
 
-    if (a.length > 1) {
-        if (a[0] === a[1]) {
+    if (prevBtn.length > 1) {
+        if (prevBtn[0] === prevBtn[1]) {
             return;
         } else {
-            tipBtns.children[a[0]].className = "inactive";
+            tipBtns.children[prevBtn[0]].className = "inactive";
         }
     }
     if (bill && people && percent) {
@@ -118,10 +132,6 @@ custom.onkeyup = (e) => {
     if (bill && people && percent) {
         calcTip();
     }
-};
-
-custom.onmousedown = (e) => {
-    e.target.style.caretColor = "transparent";
 };
 
 peopleInput.onmousedown = (e) => {
@@ -170,6 +180,9 @@ const calcTip = () => {
     tip = (billDivided * percent) / 100;
     totalPerPerson = billDivided + tip;
 
+    console.log(tip);
+    console.log(totalPerPerson);
+
     resizeText();
 
     if (isNaN(totalPerPerson) || totalPerPerson === Infinity) {
@@ -205,7 +218,6 @@ const inputState = (e, inputLength, decPlaces) => {
 
 const validInput = (e, inputLength) => {
     if (e.key !== "Backspace") {
-        console.log(maxLength);
         if (e.key === "." && isLastCharDec === true) {
             false;
         } else {
@@ -218,7 +230,11 @@ const validInput = (e, inputLength) => {
                     if (keyPress[0] === "0" && keyPress[1] === ".") {
                         keyPress.push(e.key);
                     } else {
-                        e.preventDefault();
+                        if (e.key in arrows) {
+                            true;
+                        } else {
+                            e.preventDefault();
+                        }
                     }
                 }
             }
@@ -252,7 +268,6 @@ const validInput = (e, inputLength) => {
     if (e.key === "Backspace") {
         keyPress.pop();
         if (keyPress.length === maxLength - 4) {
-            console.log("decimal removed");
             maxLength = inputLength;
             isLastCharDec = false;
         }
@@ -278,26 +293,36 @@ const reset = () => {
 };
 
 const resizeText = () => {
-    if (document.body.offsetWidth > 550) {
-        if (totalPerPerson < 1000) {
-            tipTotal.style.fontSize = fontSizesL[0];
-            peopleTotal.style.fontSize = fontSizesL[0];
+    let width = document.body.offsetWidth;
+    if (width < 360) {
+        if (totalPerPerson < 100) {
+            if (totalPerPerson < 100 && tip > 9.99) {
+                tipTotal.style.fontSize = fontSizesS[1];
+                peopleTotal.style.fontSize = fontSizesS[0];
+            } else {
+                tipTotal.style.fontSize = fontSizesS[0];
+                peopleTotal.style.fontSize = fontSizesS[0];
+            }
         }
 
+        if (totalPerPerson > 100) {
+            tipTotal.style.fontSize = fontSizesS[1];
+            peopleTotal.style.fontSize = fontSizesS[1];
+        }
         if (totalPerPerson > 1000) {
-            tipTotal.style.fontSize = fontSizesL[1];
-            peopleTotal.style.fontSize = fontSizesL[1];
+            tipTotal.style.fontSize = fontSizesS[2];
+            peopleTotal.style.fontSize = fontSizesS[2];
         }
         if (totalPerPerson > 10000) {
-            tipTotal.style.fontSize = fontSizesL[2];
-            peopleTotal.style.fontSize = fontSizesL[2];
+            tipTotal.style.fontSize = fontSizesS[3];
+            peopleTotal.style.fontSize = fontSizesS[3];
         }
         if (totalPerPerson > 100000) {
-            tipTotal.style.fontSize = fontSizesL[3];
-            peopleTotal.style.fontSize = fontSizesL[3];
+            tipTotal.style.fontSize = fontSizesS[4];
+            peopleTotal.style.fontSize = fontSizesS[4];
         }
     }
-    if (document.body.offsetWidth < 550) {
+    if (width < 550 && width > 360) {
         if (totalPerPerson < 1000) {
             tipTotal.style.fontSize = fontSizesM[0];
             peopleTotal.style.fontSize = fontSizesM[0];
@@ -316,27 +341,23 @@ const resizeText = () => {
             peopleTotal.style.fontSize = fontSizesM[3];
         }
     }
-    if (document.body.offsetWidth < 360) {
+    if (width > 550) {
         if (totalPerPerson < 1000) {
-            tipTotal.style.fontSize = fontSizesS[0];
-            peopleTotal.style.fontSize = fontSizesS[0];
+            tipTotal.style.fontSize = fontSizesL[0];
+            peopleTotal.style.fontSize = fontSizesL[0];
         }
 
-        if (totalPerPerson > 100) {
-            tipTotal.style.fontSize = fontSizesS[1];
-            peopleTotal.style.fontSize = fontSizesS[1];
-        }
         if (totalPerPerson > 1000) {
-            tipTotal.style.fontSize = fontSizesS[2];
-            peopleTotal.style.fontSize = fontSizesS[2];
+            tipTotal.style.fontSize = fontSizesL[1];
+            peopleTotal.style.fontSize = fontSizesL[1];
         }
         if (totalPerPerson > 10000) {
-            tipTotal.style.fontSize = fontSizesS[3];
-            peopleTotal.style.fontSize = fontSizesS[3];
+            tipTotal.style.fontSize = fontSizesL[2];
+            peopleTotal.style.fontSize = fontSizesL[2];
         }
         if (totalPerPerson > 100000) {
-            tipTotal.style.fontSize = fontSizesS[4];
-            peopleTotal.style.fontSize = fontSizesS[4];
+            tipTotal.style.fontSize = fontSizesL[3];
+            peopleTotal.style.fontSize = fontSizesL[3];
         }
     }
 };
