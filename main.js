@@ -36,6 +36,7 @@ const init = (window.onload = () => {
     let fontSizesM = ["36px", "32px", "28px", "24px"];
     let fontSizesS = ["36px", "30px", "24px", "20px", "18px"];
 
+    // valid keys
     let arrows = {
         ArrowUp: null,
         ArrowDown: null,

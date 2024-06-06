@@ -37,8 +37,8 @@ Users should be able to:
 
 ### Links
 
--   Solution URL: [Add solution URL here](https://your-solution-url.com)
--   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+-   Solution URL: (https://github.com/codematrix95/tip-calculator-app)
+-   Live Site URL: (https://codematrix95.github.io/tip-calculator-app/)
 
 ## My process
 
@@ -138,38 +138,169 @@ input in a dynamic way but as I kept breaking my code I realized I could use arr
 and dynamically change those arrays based on the value of the input with 2 reusuable functions
 
 ```js
-const proudOfThisFunc = () => {
-    console.log("🎉");
-};
+let isLastCharDec = false;
+let isValid = /\d|\./;
+let isDec = /\./;
+let maxLength;
+let keyPress = [];
+
+const inputState = (e, inputLength, decPlaces) => {
+        let inputValue = e.target.value;
+        keyPress = [...inputValue];
+
+        if (isDec.test(e.target.value)) {
+            isLastCharDec = true;
+            maxLength = inputLength + decPlaces;
+        } else {
+            isLastCharDec = false;
+            maxLength = inputLength;
+        }
+    };
+
+    const validInput = (e, inputLength) => {
+        if (e.key !== "Backspace") {
+            if (e.key === "." && isLastCharDec === true) {
+                false;
+            } else {
+                if (isValid.test(e.key) && keyPress[0] !== "0") {
+                    keyPress.push(e.key);
+                } else {
+                    if (keyPress[0] === "0" && e.key === ".") {
+                        keyPress.push(e.key);
+                    } else {
+                        if (keyPress[0] === "0" && keyPress[1] === ".") {
+                            keyPress.push(e.key);
+                        } else {
+                            if (e.key in arrows) {
+                                true;
+                            } else {
+                                e.preventDefault();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (keyPress.length < maxLength) {
+            true;
+        } else {
+            if (e.key !== "." && isLastCharDec === false) {
+                keyPress.pop();
+                e.preventDefault();
+            }
+
+            if (isLastCharDec === true) {
+                keyPress.pop();
+                e.preventDefault();
+            }
+        }
+
+        if (e.key === "." && isLastCharDec === true) {
+            e.preventDefault();
+        }
+
+        if (e.key === "." && isLastCharDec === false) {
+            maxLength = keyPress.length + 3;
+            isLastCharDec = true;
+        }
+
+        if (e.key === "Backspace") {
+            keyPress.pop();
+            if (keyPress.length === maxLength - 4) {
+                maxLength = inputLength;
+                isLastCharDec = false;
+            }
+        }
+    };
 ```
 
+I'd like to credit my mentor Abraham Cuenca (https://github.com/abrahamcuenca) for teaching me about forms and inputs it made the project a
+lot more efficient with his input and guidance
 ```html
-<h1>Some HTML code I'm proud of</h1>
+<div class="grid-calc">
+                    <div class="bill">
+                        <label for="bill">Bill</label>
+                        <span id="cantBeZeroBill" class="inactive"
+                            >Can't be zero</span
+                        >
+                        <input
+                            type="text"
+                            id="bill"
+                            class="inactive"
+                            name="bill"
+                            placeholder="0"
+                            autocomplete="off"
+                            inputmode="decimal"
+                        />
+                        <img src="images/icon-dollar.svg" alt="" />
+                    </div>
+                    <div class="tip">
+                        <div>Select Tip %</div>
+                        <form id="tipBtns" class="btns" autocomplete="off">
+                            <button type="button" value="5" class="inactive">
+                                5%
+                            </button>
+                            <button type="button" value="10" class="inactive">
+                                10%
+                            </button>
+                            <button type="button" value="15" class="inactive">
+                                15%
+                            </button>
+                            <button type="button" value="25" class="inactive">
+                                25%
+                            </button>
+                            <button type="button" value="50" class="inactive">
+                                50%
+                            </button>
+                            <input
+                                type="text"
+                                value=""
+                                placeholder="Custom"
+                                id="custom"
+                                class="inactive"
+                                size="6"
+                                inputmode="decimal"
+                            />
+                        </form>
+                    </div>
+
+                    <div class="people">
+                        <label for="people">Number of people</label>
+                        <span id="cantBeZeroPeople" class="inactive"
+                            >Can't be zero</span
+                        >
+                        <input
+                            type="text"
+                            id="people"
+                            class="inactive"
+                            name="people"
+                            placeholder="0"
+                            autocomplete="off"
+                            inputmode="decimal"
+                        />
+                        <img src="images/icon-person.svg" alt="" />
+                    </div>
+                </div>
 ```
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I hope to continue to grow my knowledge on HTML semantics, SEO, and accessibility. I also want to start using frameworks 
+with my new projects such as React and Bootstrap to increase efficiency and write cleaner more organized code.
 
 ### Useful resources
 
--   [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
--   [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- (https://github.com/abrahamcuenca) - I'd like to thank Abraham Cuence for all the hard work and guidance during this project without his guidance I'd still be dumpster diving youtube and forums. His input, willingness to answer
+my questions, and patience has been more than I could ever repay him.
 
 ## Author
 
--   Website - [Add your name here](https://www.your-site.com)
--   Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
--   Twitter - [@yourusername](https://www.twitter.com/yourusername)
+-   Website - (https://github.com/codematrix95)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+Perseverance is key. Even if you code just a little bit even an hour it's something. Coding is hard but if you just keep chipping away at it ask people that are more experienced than you that have the heart of a teacher
+you'll get through it. Make sure you take notes I personally highly recommend Obsidian which was referred to me by Abraham Cuenca because it's imposible to remember everything and that's where Obsidian comes in. It truly 
+is your second brain. For anyone wanting to Code I personally think it's a must have not a matter of whether or not you should get it.
