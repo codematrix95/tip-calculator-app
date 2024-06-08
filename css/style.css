@@ -21,23 +21,23 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
   }
 }
-.grid-1 header {
+.grid-1 h1 {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 155px;
 }
 @media (min-width: 600px) {
-  .grid-1 header {
+  .grid-1 h1 {
     align-items: end;
   }
 }
-.grid-1 header img {
+.grid-1 h1 img {
   height: 3.25rem;
   padding-bottom: 0px;
 }
 @media (min-width: 600px) {
-  .grid-1 header img {
+  .grid-1 h1 img {
     padding-bottom: 90px;
   }
 }
