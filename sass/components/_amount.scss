@@ -15,6 +15,16 @@
         grid-template-rows: 1fr 1fr 2fr;
         padding: 36px;
     }
+
+    p {
+        &:focus {
+            border-radius: 4px;
+            outline-offset: 4px;
+            outline: 2px solid;
+            outline-color: $strongcyan;
+        }
+    }
+
     p:nth-child(-n + 2) {
         cursor: default;
         display: flex;
@@ -67,6 +77,11 @@
                     color: $verydarkcyan;
                     cursor: pointer;
                 }
+            }
+            &:focus {
+                background-color: $lightstrongcyan;
+                color: $verydarkcyan;
+                outline: none;
             }
         }
     }

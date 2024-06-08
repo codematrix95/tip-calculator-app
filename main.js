@@ -1,5 +1,6 @@
-const init = (window.onload = () => {
+const init = () => {
     // ID's
+    const gridTwo = document.querySelector(".grid-2");
     const billInput = document.getElementById("bill");
     const peopleInput = document.getElementById("people");
     const custom = document.getElementById("custom");
@@ -23,8 +24,9 @@ const init = (window.onload = () => {
     // tipBtns
     let prevBtn = [];
     let activeBtn;
+    let index;
 
-    // inputState && isValid
+    // inputState & isValid
     let isLastCharDec = false;
     let isValid = /\d|\./;
     let isDec = /\./;
@@ -37,13 +39,15 @@ const init = (window.onload = () => {
     let fontSizesS = ["36px", "30px", "24px", "20px", "18px"];
 
     // valid keys
-    let arrows = {
-        ArrowUp: null,
-        ArrowDown: null,
+    const arrows = {
         ArrowRight: null,
         ArrowLeft: null,
         Tab: null,
+        Enter: null,
     };
+
+    // bill input move to last selected button
+    let isBtnActive = false;
 
     billInput.onmousedown = (e) => {
         e.target.style.caretColor = "transparent";
@@ -51,6 +55,9 @@ const init = (window.onload = () => {
 
     billInput.onmouseup = (e) => {
         e.target.removeAttribute("style");
+    };
+
+    billInput.onfocus = (e) => {
         inputState(e, 6, 3);
     };
 
@@ -60,6 +67,16 @@ const init = (window.onload = () => {
 
     billInput.onkeydown = (e) => {
         validInput(e, 6);
+        if (e.key === "Enter" && isBtnActive === true) {
+            if (index != 0) {
+                tipBtns.children[index].focus();
+            }
+            isBtnActive = false;
+        }
+        if (e.key === "Enter" && isBtnActive === false) {
+            tipBtns.children[0].focus();
+            isBtnActive = true;
+        }
     };
 
     billInput.onkeyup = (e) => {
@@ -72,16 +89,42 @@ const init = (window.onload = () => {
             cantBeZeroBill.className = "inactive";
             billInput.className = "inactive";
         }
+
         if (bill && people && percent) {
             calcTip();
         }
     };
 
+    tipBtns.onkeydown = (e) => {
+        if (e.shiftKey && e.key === "Enter") {
+            billInput.focus();
+            isBtnActive = true;
+        }
+        if (e.shiftKey === false && e.key === "Enter") {
+            peopleInput.focus();
+        }
+    };
+
+    tipBtns.onkeyup = (e) => {
+        if (e.key === "Tab") {
+            btnState(e);
+        }
+    };
+
     tipBtns.onclick = (e) => {
+        btnState(e);
+    };
+
+    tipBtns.onfocus = (e) => {
+        btnState(e);
+    };
+
+    const btnState = (e) => {
         percent = e.target.value;
         activeBtn = e.target;
 
-        let index = Array.from(tipBtns.children).indexOf(e.target);
+        index = Array.from(tipBtns.children).indexOf(e.target);
+        console.log(index);
 
         if (e.target.className === "inactive") {
             e.target.className = "active";
@@ -89,9 +132,9 @@ const init = (window.onload = () => {
         if (prevBtn.length === 2) {
             prevBtn.splice(0, 1);
         }
-
-        prevBtn.push(index);
-
+        if (index > -1) {
+            prevBtn.push(index);
+        }
         if (prevBtn.length > 1) {
             if (prevBtn[0] === prevBtn[1]) {
                 return;
@@ -110,6 +153,9 @@ const init = (window.onload = () => {
 
     custom.onmouseup = (e) => {
         e.target.removeAttribute("style");
+    };
+
+    custom.onfocus = (e) => {
         inputState(e, 3, 3);
     };
 
@@ -118,11 +164,15 @@ const init = (window.onload = () => {
     };
 
     custom.onkeydown = (e) => {
+        if (e.key === "Enter") {
+            peopleInput.focus();
+        }
         validInput(e, 3);
     };
 
     custom.onkeyup = (e) => {
         percent = e.target.value;
+
         if (bill && people && percent) {
             calcTip();
         }
@@ -134,6 +184,9 @@ const init = (window.onload = () => {
 
     peopleInput.onmouseup = (e) => {
         e.target.removeAttribute("style");
+    };
+
+    peopleInput.onfocus = (e) => {
         inputState(e, 3, 0);
     };
 
@@ -146,6 +199,16 @@ const init = (window.onload = () => {
             e.preventDefault();
         } else {
             validInput(e, 3);
+        }
+
+        if (e.shiftKey && e.key === "Tab") {
+            if (index != 5) {
+                tipBtns.children[index + 1].focus();
+            }
+        }
+        if (e.key === "Enter") {
+            resetBtn.className = "active"
+            resetBtn.focus();
         }
     };
 
@@ -165,8 +228,16 @@ const init = (window.onload = () => {
         }
     };
 
-    resetBtn.onclick = () => {
+    resetBtn.onmouseup = () => {
+        billInput.focus();
         reset();
+    };
+
+    resetBtn.onkeydown = (e) => {
+        if (e.key === "Enter") {
+            billInput.focus();
+            reset();
+        }
     };
 
     const calcTip = () => {
@@ -352,5 +423,6 @@ const init = (window.onload = () => {
             }
         }
     };
-});
+};
+
 init();

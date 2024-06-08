@@ -19,8 +19,8 @@
     </head>
     <body>
         <div class="grid-1">
-            <h1><img src="images/logo.svg" alt="" /></h1>
-            <div class="grid-2">
+            <header><img src="images/logo.svg" alt="" /></header>
+            <main class="grid-2">
                 <div class="grid-calc">
                     <div class="bill">
                         <label for="bill">Bill</label>
@@ -41,7 +41,12 @@
                     <div class="tip">
                         <div>Select Tip %</div>
                         <form id="tipBtns" class="btns" autocomplete="off">
-                            <button type="button" value="5" class="inactive">
+                            <button
+                                type="button"
+                                value="5"
+                                class="inactive"
+                                id="firstBtn"
+                            >
                                 5%
                             </button>
                             <button type="button" value="10" class="inactive">
@@ -87,14 +92,14 @@
                 </div>
 
                 <div class="amount">
-                    <p>
+                    <p tabindex="0">
                         <span>
                             Tip Amount <br />
                             / person</span
                         >
                         <span id="tipTotal">$0.00</span>
                     </p>
-                    <p>
+                    <p tabindex="0">
                         <span>
                             Total <br />
                             / person</span
@@ -105,7 +110,7 @@
                         <button type="button" id="reset" value="">RESET</button>
                     </p>
                 </div>
-            </div>
+            </main>
         </div>
     </body>
     <script src="main.js"></script>
