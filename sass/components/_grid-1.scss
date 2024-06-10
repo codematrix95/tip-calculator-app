@@ -6,20 +6,27 @@
         grid-template-rows: 1fr 1fr 1fr;
     }
 
-    h1 {
+    header {
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 155px;
+
         @include tablet {
             align-items: end;
         }
         img {
             height: 3.25rem;
-            padding-bottom: 0px;
+            margin-bottom: 0px;
             @include tablet {
-                padding-bottom: 90px;
+                margin-bottom: 90px;
             }
+            // &:focus {
+            //     border-radius: 4px;
+            //     outline-offset: 8px;
+            //     outline: 2px solid;
+            //     outline-color: $strongcyan;
+            // }
         }
     }
 }

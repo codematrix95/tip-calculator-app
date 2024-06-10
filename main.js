@@ -1,6 +1,5 @@
 const init = () => {
     // ID's
-    const gridTwo = document.querySelector(".grid-2");
     const billInput = document.getElementById("bill");
     const peopleInput = document.getElementById("people");
     const custom = document.getElementById("custom");
@@ -24,7 +23,7 @@ const init = () => {
     // tipBtns
     let prevBtn = [];
     let activeBtn;
-    let index;
+    let index = 1;
 
     // inputState & isValid
     let isLastCharDec = false;
@@ -46,8 +45,10 @@ const init = () => {
         Enter: null,
     };
 
-    // bill input move to last selected button
-    let isBtnActive = false;
+    // if this variable is set to true you will move to the last activated button
+    // when tabbing or when you press enter other wise you will tab to the next
+    // element in the tab index look at the function bill.onkeydown.
+    // let isBtnActive = false;
 
     billInput.onmousedown = (e) => {
         e.target.style.caretColor = "transparent";
@@ -67,15 +68,17 @@ const init = () => {
 
     billInput.onkeydown = (e) => {
         validInput(e, 6);
-        if (e.key === "Enter" && isBtnActive === true) {
-            if (index != 0) {
+        // if (e.key === "Enter" && isBtnActive === false) {
+        //     tipBtns.children[1].focus();
+        //     isBtnActive = true;
+        // }
+        if (e.key === "Enter") {
+            if (index !== 1) {
                 tipBtns.children[index].focus();
+            } else {
+                tipBtns.children[1].focus();
             }
-            isBtnActive = false;
-        }
-        if (e.key === "Enter" && isBtnActive === false) {
-            tipBtns.children[0].focus();
-            isBtnActive = true;
+            // isBtnActive = false;
         }
     };
 
@@ -85,9 +88,11 @@ const init = () => {
         if (bill < 0.01 && keyPress.length !== 0) {
             cantBeZeroBill.className = "active";
             billInput.className = "active";
+            cantBeZeroBill.setAttribute("aria-live", "assertive");
         } else {
             cantBeZeroBill.className = "inactive";
             billInput.className = "inactive";
+            cantBeZeroBill.removeAttribute("aria-live");
         }
 
         if (bill && people && percent) {
@@ -98,7 +103,6 @@ const init = () => {
     tipBtns.onkeydown = (e) => {
         if (e.shiftKey && e.key === "Enter") {
             billInput.focus();
-            isBtnActive = true;
         }
         if (e.shiftKey === false && e.key === "Enter") {
             peopleInput.focus();
@@ -124,7 +128,6 @@ const init = () => {
         activeBtn = e.target;
 
         index = Array.from(tipBtns.children).indexOf(e.target);
-        console.log(index);
 
         if (e.target.className === "inactive") {
             e.target.className = "active";
@@ -207,7 +210,7 @@ const init = () => {
             }
         }
         if (e.key === "Enter") {
-            resetBtn.className = "active"
+            resetBtn.className = "active";
             resetBtn.focus();
         }
     };
@@ -218,9 +221,11 @@ const init = () => {
         if (people === "0") {
             cantBeZeroPeople.className = "active";
             peopleInput.className = "active";
+            cantBeZeroPeople.setAttribute("aria-live", "assertive");
         } else {
             cantBeZeroPeople.className = "inactive";
             peopleInput.className = "inactive";
+            cantBeZeroPeople.removeAttribute("aria-live");
         }
 
         if (bill && people && percent) {

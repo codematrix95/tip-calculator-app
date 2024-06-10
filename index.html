@@ -19,8 +19,18 @@
     </head>
     <body>
         <div class="grid-1">
-            <h1><img src="images/logo.svg" alt="" /></h1>
-            <div class="grid-2">
+            <!-- <h1><img src="images/logo.svg" alt="Splitter"/></h1> -->
+            <header>
+                <h1>
+                    <img
+                        id="splitter"
+                        src="images/logo.svg"
+                        alt="Splitter"
+                        tabindex="0"
+                    />
+                </h1>
+            </header>
+            <main class="grid-2">
                 <div class="grid-calc">
                     <div class="bill">
                         <label for="bill">Bill</label>
@@ -38,41 +48,67 @@
                         />
                         <img src="images/icon-dollar.svg" alt="" />
                     </div>
-                    <div class="tip">
-                        <div>Select Tip %</div>
-                        <form id="tipBtns" class="btns" autocomplete="off">
-                            <button
-                                type="button"
-                                value="5"
-                                class="inactive"
-                                id="firstBtn"
-                            >
-                                5%
-                            </button>
-                            <button type="button" value="10" class="inactive">
-                                10%
-                            </button>
-                            <button type="button" value="15" class="inactive">
-                                15%
-                            </button>
-                            <button type="button" value="25" class="inactive">
-                                25%
-                            </button>
-                            <button type="button" value="50" class="inactive">
-                                50%
-                            </button>
-                            <input
-                                type="text"
-                                value=""
-                                placeholder="Custom"
-                                id="custom"
-                                class="inactive"
-                                size="6"
-                                inputmode="decimal"
-                            />
-                        </form>
-                    </div>
 
+                    <form id="tipBtns" class="btns" autocomplete="off">
+                        <legend id="selectTip">Select Tip %</legend>
+                        <button
+                            id="5"
+                            type="button"
+                            value="5"
+                            class="inactive"
+                            id="firstBtn"
+                            aria-labelledby="selectTip 5"
+                        >
+                            5%
+                        </button>
+                        <button
+                            id="10"
+                            type="button"
+                            value="10"
+                            class="inactive"
+                            aria-labelledby="selectTip 10"
+                        >
+                            10%
+                        </button>
+                        <button
+                            id="15"
+                            type="button"
+                            value="15"
+                            class="inactive"
+                            aria-labelledby="selectTip 15"
+                        >
+                            15%
+                        </button>
+                        <button
+                            id="25"
+                            type="button"
+                            value="25"
+                            class="inactive"
+                            aria-labelledby="selectTip 25"
+                        >
+                            25%
+                        </button>
+                        <button
+                            id="50"
+                            type="button"
+                            value="50"
+                            class="inactive"
+                            aria-labelledby="selectTip 50"
+                        >
+                            50%
+                        </button>
+                        <input
+                            type="text"
+                            value=""
+                            placeholder="Custom"
+                            id="custom"
+                            class="inactive"
+                            size="6"
+                            inputmode="decimal"
+                            aria-labelledby="selectTip"
+                            aria-describedby="selectTip"
+                        />
+                    </form>
                     <div class="people">
                         <label for="people">Number of people</label>
                         <span id="cantBeZeroPeople" class="inactive"
@@ -110,7 +146,7 @@
                         <button type="button" id="reset" value="">RESET</button>
                     </p>
                 </div>
-            </div>
+            </main>
         </div>
     </body>
     <script src="main.js"></script>

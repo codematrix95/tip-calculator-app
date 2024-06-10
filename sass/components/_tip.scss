@@ -3,9 +3,10 @@
     @include desktop {
         margin-bottom: 42px;
     }
-    div {
+    label {
         font-size: 16px;
         margin-bottom: 12px;
+
         @include desktop {
             margin-bottom: 16px;
         }

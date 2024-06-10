@@ -21,24 +21,24 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
   }
 }
-.grid-1 h1 {
+.grid-1 header {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 155px;
 }
 @media (min-width: 600px) {
-  .grid-1 h1 {
+  .grid-1 header {
     align-items: end;
   }
 }
-.grid-1 h1 img {
+.grid-1 header img {
   height: 3.25rem;
-  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 @media (min-width: 600px) {
-  .grid-1 h1 img {
-    padding-bottom: 90px;
+  .grid-1 header img {
+    margin-bottom: 90px;
   }
 }
 
@@ -165,42 +165,29 @@ body {
   }
 }
 
-.tip {
-  margin-bottom: 24px;
-}
-@media (min-width: 1200px) {
-  .tip {
-    margin-bottom: 42px;
-  }
-}
-.tip div {
-  font-size: 16px;
-  margin-bottom: 12px;
-}
-@media (min-width: 1200px) {
-  .tip div {
-    margin-bottom: 16px;
-  }
-}
-
 .btns {
   display: grid;
   gap: 16px;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  margin-bottom: 24px;
 }
 @media (min-width: 600px) {
   .btns {
     gap: 10px;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @media (min-width: 1200px) {
   .btns {
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 42px;
   }
+}
+.btns legend {
+  grid-column: 1/-1;
 }
 .btns button {
   border: none;
@@ -356,12 +343,6 @@ body {
     grid-template-rows: 1fr 1fr 2fr;
     padding: 36px;
   }
-}
-.amount p:focus {
-  border-radius: 4px;
-  outline-offset: 4px;
-  outline: 2px solid;
-  outline-color: hsl(172, 67%, 45%);
 }
 .amount p:nth-child(-n+2) {
   cursor: default;
