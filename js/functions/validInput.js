@@ -1,4 +1,4 @@
-import { vars, validKey } from "../variables.js";
+import { vars, validKey } from "../ids+variables/variables.js";
 
 export const validInput = (e, inputLength) => {
     if (e.key !== "Backspace") {

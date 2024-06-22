@@ -6,14 +6,14 @@ import {
     tipBtns,
     cantBeZeroBill,
     cantBeZeroPeople,
-} from "./js/getId.js";
-import { validKey, vars } from "./js/variables.js";
+} from "./ids+variables/getId.js";
+import { validKey, vars } from "./ids+variables/variables.js";
 
-import { inputState } from "./js/functions/inputState.js";
-import { validInput } from "./js/functions/validInput.js";
-import { btnState } from "./js/functions/btnState.js";
-import { calcTip } from "./js/functions/calcTip.js";
-import { reset } from "./js/functions/reset.js";
+import { inputState } from "./functions/inputState.js";
+import { validInput } from "./functions/validInput.js";
+import { btnState } from "./functions/btnState.js";
+import { calcTip } from "./functions/calcTip.js";
+import { reset } from "./functions/reset.js";
 
 document.body.onmouseup = (e) => {
     if (e.target.tagName === "INPUT") {

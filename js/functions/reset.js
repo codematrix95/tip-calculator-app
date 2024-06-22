@@ -1,5 +1,11 @@
-import { vars } from "../variables.js";
-import { tipTotal, peopleTotal, billInput, peopleInput, custom } from "../getId.js";
+import { vars } from "../ids+variables/variables.js";
+import {
+    tipTotal,
+    peopleTotal,
+    billInput,
+    peopleInput,
+    custom,
+} from "../ids+variables/getId.js";
 
 export const reset = () => {
     vars.keyPress = [];
@@ -17,7 +23,9 @@ export const reset = () => {
     vars.people = 0;
     vars.percent = 0;
 
-    vars.activeBtn === undefined ? true : (vars.activeBtn.className = "inactive");
+    vars.activeBtn === undefined
+        ? true
+        : (vars.activeBtn.className = "inactive");
 
     window.scrollTo(0, 0, document.body.scrollHeight);
 };

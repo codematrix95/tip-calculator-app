@@ -1,4 +1,4 @@
-import { vars } from "../variables.js";
+import { vars } from "../ids+variables/variables.js";
 
 export const inputState = (e, inputLength, decPlaces) => {
     let inputValue = e.target.value;

@@ -1,5 +1,5 @@
-import { vars } from "../variables.js";
-import { tipTotal, peopleTotal } from "../getId.js";
+import { vars } from "../ids+variables/variables.js";
+import { tipTotal, peopleTotal } from "../ids+variables/getId.js";
 
 export const resizeText = () => {
     let width = document.body.offsetWidth;

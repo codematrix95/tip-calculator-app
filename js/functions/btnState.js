@@ -1,5 +1,5 @@
-import { tipBtns } from "../getId.js";
-import { vars } from "../variables.js";
+import { tipBtns } from "../ids+variables/getId.js";
+import { vars } from "../ids+variables/variables.js";
 import { calcTip } from "./calcTip.js";
 
 export const btnState = (e) => {

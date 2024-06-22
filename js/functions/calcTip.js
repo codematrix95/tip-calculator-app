@@ -1,5 +1,5 @@
-import { vars } from "../variables.js";
-import { tipTotal, peopleTotal } from "../getId.js";
+import { vars } from "../ids+variables/variables.js";
+import { tipTotal, peopleTotal } from "../ids+variables/getId.js";
 import { resizeText } from "./resizeText.js";
 
 export const calcTip = () => {
