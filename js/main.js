@@ -7,7 +7,7 @@ import {
     cantBeZeroBill,
     cantBeZeroPeople,
 } from "./ids+variables/getId.js";
-import { validKey, vars } from "./ids+variables/variables.js";
+import { vars } from "./ids+variables/variables.js";
 
 import { inputState } from "./functions/inputState.js";
 import { validInput } from "./functions/validInput.js";
@@ -83,7 +83,6 @@ tipBtns.onkeydown = (e) => {
 tipBtns.onkeyup = (e) => {
     if (e.key === "Tab") {
         btnState(e);
-        console.log(vars.index);
     }
 };
 

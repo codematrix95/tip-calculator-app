@@ -29,8 +29,6 @@ export const vars = {
 
 // used for validInput
 export const validKey = {
-    // ArrowRight: null,
-    // ArrowLeft: null,
     Tab: null,
     Enter: null,
 };
