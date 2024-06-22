@@ -157,131 +157,131 @@ const inputState = (e, inputLength, decPlaces) => {
         }
     };
 
-    const validInput = (e, inputLength) => {
-        if (e.key !== "Backspace") {
-            if (e.key === "." && isLastCharDec === true) {
-                false;
+const validInput = (e, inputLength) => {
+    if (e.key !== "Backspace") {
+        if (e.key === "." && isLastCharDec === true) {
+            false;
+        } else {
+            if (isValid.test(e.key) && keyPress[0] !== "0") {
+                keyPress.push(e.key);
             } else {
-                if (isValid.test(e.key) && keyPress[0] !== "0") {
+                if (keyPress[0] === "0" && e.key === ".") {
                     keyPress.push(e.key);
                 } else {
-                    if (keyPress[0] === "0" && e.key === ".") {
+                    if (keyPress[0] === "0" && keyPress[1] === ".") {
                         keyPress.push(e.key);
                     } else {
-                        if (keyPress[0] === "0" && keyPress[1] === ".") {
-                            keyPress.push(e.key);
+                        if (e.key in arrows) {
+                            true;
                         } else {
-                            if (e.key in arrows) {
-                                true;
-                            } else {
-                                e.preventDefault();
-                            }
+                            e.preventDefault();
                         }
                     }
                 }
             }
         }
+    }
 
-        if (keyPress.length < maxLength) {
-            true;
-        } else {
-            if (e.key !== "." && isLastCharDec === false) {
-                keyPress.pop();
-                e.preventDefault();
-            }
-
-            if (isLastCharDec === true) {
-                keyPress.pop();
-                e.preventDefault();
-            }
-        }
-
-        if (e.key === "." && isLastCharDec === true) {
+    if (keyPress.length < maxLength) {
+        true;
+    } else {
+        if (e.key !== "." && isLastCharDec === false) {
+            keyPress.pop();
             e.preventDefault();
         }
 
-        if (e.key === "." && isLastCharDec === false) {
-            maxLength = keyPress.length + 3;
-            isLastCharDec = true;
-        }
-
-        if (e.key === "Backspace") {
+        if (isLastCharDec === true) {
             keyPress.pop();
-            if (keyPress.length === maxLength - 4) {
-                maxLength = inputLength;
-                isLastCharDec = false;
-            }
+            e.preventDefault();
         }
-    };
+    }
+
+    if (e.key === "." && isLastCharDec === true) {
+        e.preventDefault();
+    }
+
+    if (e.key === "." && isLastCharDec === false) {
+        maxLength = keyPress.length + 3;
+        isLastCharDec = true;
+    }
+
+    if (e.key === "Backspace") {
+        keyPress.pop();
+        if (keyPress.length === maxLength - 4) {
+            maxLength = inputLength;
+            isLastCharDec = false;
+        }
+    }
+};
 ```
 
 I'd like to credit my mentor Abraham Cuenca (https://github.com/abrahamcuenca) for teaching me about forms and inputs it made the project a
 lot more efficient with his input and guidance
 ```html
 <div class="grid-calc">
-                    <div class="bill">
-                        <label for="bill">Bill</label>
-                        <span id="cantBeZeroBill" class="inactive"
-                            >Can't be zero</span
-                        >
-                        <input
-                            type="text"
-                            id="bill"
-                            class="inactive"
-                            name="bill"
-                            placeholder="0"
-                            autocomplete="off"
-                            inputmode="decimal"
-                        />
-                        <img src="images/icon-dollar.svg" alt="" />
-                    </div>
-                    <div class="tip">
-                        <div>Select Tip %</div>
-                        <form id="tipBtns" class="btns" autocomplete="off">
-                            <button type="button" value="5" class="inactive">
-                                5%
-                            </button>
-                            <button type="button" value="10" class="inactive">
-                                10%
-                            </button>
-                            <button type="button" value="15" class="inactive">
-                                15%
-                            </button>
-                            <button type="button" value="25" class="inactive">
-                                25%
-                            </button>
-                            <button type="button" value="50" class="inactive">
-                                50%
-                            </button>
-                            <input
-                                type="text"
-                                value=""
-                                placeholder="Custom"
-                                id="custom"
-                                class="inactive"
-                                size="6"
-                                inputmode="decimal"
-                            />
-                        </form>
-                    </div>
+    <div class="bill">
+        <label for="bill">Bill</label>
+        <span id="cantBeZeroBill" class="inactive"
+            >Can't be zero</span
+        >
+        <input
+            type="text"
+            id="bill"
+            class="inactive"
+            name="bill"
+            placeholder="0"
+            autocomplete="off"
+            inputmode="decimal"
+        />
+        <img src="images/icon-dollar.svg" alt="" />
+    </div>
+    <div class="tip">
+        <div>Select Tip %</div>
+        <form id="tipBtns" class="btns" autocomplete="off">
+            <button type="button" value="5" class="inactive">
+                5%
+            </button>
+            <button type="button" value="10" class="inactive">
+                10%
+            </button>
+            <button type="button" value="15" class="inactive">
+                15%
+            </button>
+            <button type="button" value="25" class="inactive">
+                25%
+            </button>
+            <button type="button" value="50" class="inactive">
+                50%
+            </button>
+            <input
+                type="text"
+                value=""
+                placeholder="Custom"
+                id="custom"
+                class="inactive"
+                size="6"
+                inputmode="decimal"
+            />
+        </form>
+    </div>
 
-                    <div class="people">
-                        <label for="people">Number of people</label>
-                        <span id="cantBeZeroPeople" class="inactive"
-                            >Can't be zero</span
-                        >
-                        <input
-                            type="text"
-                            id="people"
-                            class="inactive"
-                            name="people"
-                            placeholder="0"
-                            autocomplete="off"
-                            inputmode="decimal"
-                        />
-                        <img src="images/icon-person.svg" alt="" />
-                    </div>
-                </div>
+    <div class="people">
+        <label for="people">Number of people</label>
+        <span id="cantBeZeroPeople" class="inactive"
+            >Can't be zero</span
+        >
+        <input
+            type="text"
+            id="people"
+            class="inactive"
+            name="people"
+            placeholder="0"
+            autocomplete="off"
+            inputmode="decimal"
+        />
+        <img src="images/icon-person.svg" alt="" />
+    </div>
+</div>
 ```
 
 ### Continued development
@@ -291,16 +291,23 @@ with my new projects such as React and Bootstrap to increase efficiency and writ
 
 ### Useful resources
 
-- (https://github.com/abrahamcuenca) - I'd like to thank Abraham Cuence for all the hard work and guidance during this project without his guidance I'd still be dumpster diving youtube and forums. His input, willingness to answer
-my questions, and patience has been more than I could ever repay him.
+- (https://github.com/abrahamcuenca) - I'd like to thank Abraham Cuence for all the hard work and guidance during this project without his guidance I'd still be dumpster diving youtube and forums. His input, willingness to answer my questions, and patience has been more than I could ever repay him.
 
 ## Author
 
--   Website - (https://github.com/codematrix95)
+-  (https://github.com/codematrix95)
 
 
 ## Acknowledgments
 
-Perseverance is key. Even if you code just a little bit even an hour it's something. Coding is hard but if you just keep chipping away at it ask people that are more experienced than you that have the heart of a teacher
-you'll get through it. Make sure you take notes I personally highly recommend Obsidian which was referred to me by Abraham Cuenca because it's imposible to remember everything and that's where Obsidian comes in. It truly 
-is your second brain. For anyone wanting to Code I personally think it's a must have not a matter of whether or not you should get it.
+Perseverance is key. Even if you code just a little bit even an hour it's something. 
+Coding is hard but if you just keep chipping away at it ask people that are more experienced than you that have the heart of a teacher
+you'll get through it. 
+Make sure you take notes I personally highly recommend Obsidian which was referred to me by 
+
+Abraham Cuenca 
+
+because it's imposible to remember everything and that's where Obsidian comes in. 
+
+It truly is your second brain. For anyone wanting to Code I personally think 
+it's a must have not a matter of whether or not you should get it.

@@ -1,0 +1,9 @@
+export const billInput = document.getElementById("bill");
+export const peopleInput = document.getElementById("people");
+export const custom = document.getElementById("custom");
+export const resetBtn = document.getElementById("reset");
+export const tipBtns = document.getElementById("tipBtns");
+export const tipTotal = document.getElementById("tipTotal");
+export const peopleTotal = document.getElementById("personTotal");
+export const cantBeZeroBill = document.getElementById("cantBeZeroBill");
+export const cantBeZeroPeople = document.getElementById("cantBeZeroPeople");
