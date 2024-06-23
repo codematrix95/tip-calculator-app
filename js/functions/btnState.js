@@ -24,7 +24,4 @@ export const btnState = (e) => {
             tipBtns.children[vars.prevBtn[0]].className = "inactive";
         }
     }
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
 };

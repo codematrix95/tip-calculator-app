@@ -23,6 +23,13 @@ document.body.onmouseup = (e) => {
     }
 };
 
+document.body.onkeyup = (e) => {
+    console.log("hi")
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
+    }
+}
+
 billInput.onmousedown = (e) => {
     e.target.style.caretColor = "transparent";
 };
@@ -49,10 +56,6 @@ billInput.onkeydown = (e) => {
             tipBtns.children[1].focus();
         }
     }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
 };
 
 billInput.onkeyup = (e) => {
@@ -66,6 +69,10 @@ billInput.onkeyup = (e) => {
         cantBeZeroBill.className = "inactive";
         billInput.className = "inactive";
         cantBeZeroBill.removeAttribute("aria-live");
+    }
+
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
     }
 };
 
@@ -81,6 +88,10 @@ tipBtns.onkeydown = (e) => {
 tipBtns.onkeyup = (e) => {
     if (e.key === "Tab") {
         btnState(e);
+    }
+
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
     }
 };
 
@@ -113,10 +124,6 @@ custom.onkeydown = (e) => {
         peopleInput.focus();
     }
     validInput(e, 3);
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
 };
 
 custom.onkeyup = (e) => {
