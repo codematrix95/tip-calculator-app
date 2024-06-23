@@ -39,8 +39,6 @@ billInput.onblur = () => {
     vars.keyPress = [];
 };
 
-vars.maxLength = 5;
-
 billInput.onkeydown = (e) => {
     validInput(e, 6);
 
@@ -50,6 +48,10 @@ billInput.onkeydown = (e) => {
         } else {
             tipBtns.children[1].focus();
         }
+    }
+
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
     }
 };
 
@@ -64,10 +66,6 @@ billInput.onkeyup = (e) => {
         cantBeZeroBill.className = "inactive";
         billInput.className = "inactive";
         cantBeZeroBill.removeAttribute("aria-live");
-    }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
     }
 };
 
@@ -115,6 +113,10 @@ custom.onkeydown = (e) => {
         peopleInput.focus();
     }
     validInput(e, 3);
+
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
+    }
 };
 
 custom.onkeyup = (e) => {
@@ -159,6 +161,10 @@ peopleInput.onkeydown = (e) => {
         resetBtn.className = "active";
         resetBtn.focus();
     }
+
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
+    }
 };
 
 peopleInput.onkeyup = (e) => {
@@ -177,10 +183,6 @@ peopleInput.onkeyup = (e) => {
         cantBeZeroPeople.className = "inactive";
         peopleInput.className = "inactive";
         cantBeZeroPeople.removeAttribute("aria-live");
-    }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
     }
 };
 
