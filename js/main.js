@@ -15,19 +15,23 @@ import { btnState } from "./functions/btnState.js";
 import { calcTip } from "./functions/calcTip.js";
 import { reset } from "./functions/reset.js";
 
-document.body.onmouseup = (e) => {
-    if (e.target.tagName === "INPUT") {
-        if (e.target.selectionStart !== e.target.value.length) {
-            e.target.selectionStart = e.target.value.length;
-        }
-    }
-};
+// document.body.onmouseup = (e) => {
+//     if (e.target.tagName === "INPUT") {
+//         if (e.target.selectionStart !== e.target.value.length) {
+//             e.target.selectionStart = e.target.value.length;
+//         }
+//     }
+// };
 
-document.body.ontouchend = () => {
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
-}
+// document.body.ontouchend = (e) => {
+//     if (e.target.id !== "reset") {
+//         if (e.target.tagName === "INPUT" || e.target.tagName === "BUTTON") {
+//             if (vars.bill && vars.people && vars.percent) {
+//                 calcTip();
+//             }
+//         }
+//     }
+// };
 
 billInput.onmousedown = (e) => {
     e.target.style.caretColor = "transparent";
