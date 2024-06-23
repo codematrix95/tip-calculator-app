@@ -13,7 +13,7 @@ body {
 
 .grid-1 {
   display: grid;
-  grid-template-rows: 1fr 5fr;
+  grid-template-rows: 1fr 3fr;
   height: 100vh;
 }
 @media (min-width: 600px) {

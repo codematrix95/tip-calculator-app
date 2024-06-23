@@ -92,10 +92,6 @@ tipBtns.onkeyup = (e) => {
     if (e.key === "Tab") {
         btnState(e);
     }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
 };
 
 tipBtns.onclick = (e) => {
@@ -171,10 +167,6 @@ peopleInput.onkeydown = (e) => {
         resetBtn.className = "active";
         resetBtn.focus();
     }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
 };
 
 peopleInput.onkeyup = (e) => {
@@ -193,6 +185,10 @@ peopleInput.onkeyup = (e) => {
         cantBeZeroPeople.className = "inactive";
         peopleInput.className = "inactive";
         cantBeZeroPeople.removeAttribute("aria-live");
+    }
+
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
     }
 };
 
