@@ -16,11 +16,11 @@ import { calcTip } from "./functions/calcTip.js";
 import { reset } from "./functions/reset.js";
 
 // document.body.onmouseup = (e) => {
-//     if (e.target.tagName === "INPUT") {
-//         if (e.target.selectionStart !== e.target.value.length) {
-//             e.target.selectionStart = e.target.value.length;
-//         }
+// if (e.target.tagName === "INPUT") {
+//     if (e.target.selectionStart !== e.target.value.length) {
+//         e.target.selectionStart = e.target.value.length;
 //     }
+// }
 // };
 
 // document.body.ontouchend = (e) => {
@@ -52,6 +52,8 @@ billInput.onblur = () => {
 billInput.onkeydown = (e) => {
     validInput(e, 6);
 
+    e.target.style.backgroundColor = "red";
+
     if (e.key === "Enter") {
         if (vars.index !== 1) {
             tipBtns.children[index].focus();
@@ -63,6 +65,8 @@ billInput.onkeydown = (e) => {
 
 billInput.onkeyup = (e) => {
     vars.bill = e.target.value;
+
+    e.target.style.backgroundColor = "red";
 
     if (vars.bill < 0.01 && vars.keyPress.length !== 0) {
         cantBeZeroBill.className = "active";
