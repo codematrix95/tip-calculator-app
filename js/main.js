@@ -23,8 +23,7 @@ document.body.onmouseup = (e) => {
     }
 };
 
-document.body.onkeyup = (e) => {
-    console.log("hi")
+document.body.ontouchend = () => {
     if (vars.bill && vars.people && vars.percent) {
         calcTip();
     }
