@@ -1,57 +1,42 @@
 import { vars, validKey } from "../ids+variables/variables.js";
 
-export const validInput = (e, inputLength) => {
-    if (e.key !== "Backspace") {
-        if (e.key === "." && vars.isLastCharDec === true) {
-            false;
+export const validInput = (e) => {
+    if (e.key === "." && vars.isDec.test(vars.inputValue)) {
+        e.preventDefault();
+    } else {
+        if (vars.isValid.test(e.key) && vars.inputValue[0] !== "0") {
+            true;
         } else {
-            if (vars.isValid.test(e.key) && vars.keyPress[0] !== "0") {
-                vars.keyPress.push(e.key);
+            if (vars.inputValue[0] === "0" && e.key === ".") {
+                true;
             } else {
-                if (vars.keyPress[0] === "0" && e.key === ".") {
-                    vars.keyPress.push(e.key);
+                if (vars.inputValue[0] === "0" && vars.inputValue[1] === ".") {
+                    true;
                 } else {
-                    if (vars.keyPress[0] === "0" && vars.keyPress[1] === ".") {
-                        vars.keyPress.push(e.key);
+                    if (e.key in validKey) {
+                        true;
                     } else {
-                        if (e.key in validKey) {
-                            true;
-                        } else {
-                            e.preventDefault();
-                        }
+                        e.preventDefault();
                     }
                 }
             }
         }
     }
 
-    if (vars.keyPress.length < vars.maxLength) {
+    if (vars.keyPressed.length < vars.maxLength) {
         true;
+        if (vars.isValid.test(e.key)) {
+            vars.keyPressed.push(e.key);
+        }
     } else {
-        if (e.key !== "." && vars.isLastCharDec === false) {
-            vars.keyPress.pop();
-            e.preventDefault();
+        if(e.key === ".") {
+            vars.keyPressed.push(e.key)
         }
-        if (vars.isLastCharDec === true) {
-            vars.keyPress.pop();
+
+        if (e.key in validKey || e.key === ".") {
+            true;
+        } else {
             e.preventDefault();
-        }
-    }
-
-    if (e.key === "." && vars.isLastCharDec === true) {
-        e.preventDefault();
-    }
-
-    if (e.key === "." && vars.isLastCharDec === false) {
-        vars.maxLength = vars.keyPress.length + 3;
-        vars.isLastCharDec = true;
-    }
-
-    if (e.key === "Backspace") {
-        vars.keyPress.pop();
-        if (vars.keyPress.length === vars.maxLength - 4) {
-            vars.maxLength = inputLength;
-            vars.isLastCharDec = false;
         }
     }
 };

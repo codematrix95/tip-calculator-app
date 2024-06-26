@@ -1,6 +1,5 @@
 import { tipBtns } from "../ids+variables/getId.js";
 import { vars } from "../ids+variables/variables.js";
-import { calcTip } from "./calcTip.js";
 
 export const btnState = (e) => {
     vars.percent = e.target.value;
@@ -23,9 +22,5 @@ export const btnState = (e) => {
         } else {
             tipBtns.children[vars.prevBtn[0]].className = "inactive";
         }
-    }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
     }
 };

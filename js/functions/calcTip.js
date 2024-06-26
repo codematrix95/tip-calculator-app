@@ -14,13 +14,11 @@ export const calcTip = () => {
         vars.totalPerPerson = 0;
     }
 
-    tipTotal.textContent = new Intl.NumberFormat("en-US", {
+    let x = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-    }).format(vars.tip);
+    });
 
-    peopleTotal.textContent = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-    }).format(vars.totalPerPerson);
+    tipTotal.textContent = x.format(vars.tip);
+    peopleTotal.textContent = x.format(vars.totalPerPerson);
 };

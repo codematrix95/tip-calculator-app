@@ -138,78 +138,84 @@ input in a dynamic way but as I kept breaking my code I realized I could use arr
 and dynamically change those arrays based on the value of the input with 2 reusuable functions
 
 ```js
-let isLastCharDec = false;
-let isValid = /\d|\./;
-let isDec = /\./;
-let maxLength;
-let keyPress = [];
+const inputState = (e, intPlaces, decPlaces) => {
+    vars.inputValue = [...e.target.value];
+    vars.keyPressed = vars.inputValue
+    vars.caretPos = e.target.selectionEnd;
 
-const inputState = (e, inputLength, decPlaces) => {
-        let inputValue = e.target.value;
-        keyPress = [...inputValue];
-
-        if (isDec.test(e.target.value)) {
-            isLastCharDec = true;
-            maxLength = inputLength + decPlaces;
-        } else {
-            isLastCharDec = false;
-            maxLength = inputLength;
+    if (vars.isDec.test(vars.inputValue)) {
+        vars.indexOfDec = vars.inputValue.indexOf(".");
+        vars.intArr = vars.inputValue.slice(0, vars.indexOfDec);
+        let indexOfDecEnd = vars.indexOfDec + decPlaces + 1;
+        
+        if (vars.caretPos > vars.indexOfDec) {
+            vars.decArr = vars.inputValue.slice(vars.indexOfDec, indexOfDecEnd);
+            vars.maxLength = vars.intArr.length + decPlaces + 1;
         }
-    };
 
-const validInput = (e, inputLength) => {
-    if (e.key !== "Backspace") {
-        if (e.key === "." && isLastCharDec === true) {
-            false;
-        } else {
-            if (isValid.test(e.key) && keyPress[0] !== "0") {
-                keyPress.push(e.key);
+        if (vars.caretPos <= vars.indexOfDec) {
+            if (vars.decArr.length === decPlaces + 1) {
+                vars.maxLength = intPlaces + decPlaces + 1;
             } else {
-                if (keyPress[0] === "0" && e.key === ".") {
-                    keyPress.push(e.key);
+                vars.maxLength = intPlaces + vars.decArr.length;
+            }
+        }
+
+        if(e.key === "Backspace") {
+            vars.keyPressed = vars.inputValue
+        }
+    } else {
+        vars.maxLength = intPlaces;
+
+        if (vars.inputValue.length <= intPlaces) {
+            vars.intArr = vars.inputValue;
+        }
+    
+        if (e.key === "Backspace") {
+            vars.decArr = [];
+            e.target.value = vars.intArr.join("");
+            vars.keyPressed = [...e.target.value]
+        }        
+    }   
+};
+
+const validInput = (e) => {
+    if (e.key === "." && vars.isDec.test(vars.inputValue)) {
+        e.preventDefault();
+    } else {
+        if (vars.isValid.test(e.key) && vars.inputValue[0] !== "0") {
+            true;
+        } else {
+            if (vars.inputValue[0] === "0" && e.key === ".") {
+                true;
+            } else {
+                if (vars.inputValue[0] === "0" && vars.inputValue[1] === ".") {
+                    true;
                 } else {
-                    if (keyPress[0] === "0" && keyPress[1] === ".") {
-                        keyPress.push(e.key);
+                    if (e.key in validKey) {
+                        true;
                     } else {
-                        if (e.key in arrows) {
-                            true;
-                        } else {
-                            e.preventDefault();
-                        }
+                        e.preventDefault();
                     }
                 }
             }
         }
     }
 
-    if (keyPress.length < maxLength) {
+    if (vars.keyPressed.length < vars.maxLength) {
         true;
+        if (vars.isValid.test(e.key)) {
+            vars.keyPressed.push(e.key);
+        }
     } else {
-        if (e.key !== "." && isLastCharDec === false) {
-            keyPress.pop();
-            e.preventDefault();
+        if(e.key === ".") {
+            vars.keyPressed.push(e.key)
         }
 
-        if (isLastCharDec === true) {
-            keyPress.pop();
+        if (e.key in validKey || e.key === ".") {
+            true;
+        } else {
             e.preventDefault();
-        }
-    }
-
-    if (e.key === "." && isLastCharDec === true) {
-        e.preventDefault();
-    }
-
-    if (e.key === "." && isLastCharDec === false) {
-        maxLength = keyPress.length + 3;
-        isLastCharDec = true;
-    }
-
-    if (e.key === "Backspace") {
-        keyPress.pop();
-        if (keyPress.length === maxLength - 4) {
-            maxLength = inputLength;
-            isLastCharDec = false;
         }
     }
 };

@@ -12,14 +12,18 @@
         align-items: center;
         min-height: 155px;
         @include tablet {
-            align-items: end;
+            @media (min-height: 1000px) {
+                align-items: end;
+            }
         }
 
         img {
             height: 3.25rem;
             margin-bottom: 0px;
             @include tablet {
-                margin-bottom: 90px;
+                @media (min-height: 1000px) {
+                    margin-bottom: 90px;
+                }
             }
         }
     }

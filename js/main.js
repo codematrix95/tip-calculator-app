@@ -8,30 +8,19 @@ import {
     cantBeZeroPeople,
 } from "./ids+variables/getId.js";
 import { vars } from "./ids+variables/variables.js";
-
 import { inputState } from "./functions/inputState.js";
 import { validInput } from "./functions/validInput.js";
 import { btnState } from "./functions/btnState.js";
 import { calcTip } from "./functions/calcTip.js";
 import { reset } from "./functions/reset.js";
 
-// document.body.onmouseup = (e) => {
-// if (e.target.tagName === "INPUT") {
-//     if (e.target.selectionStart !== e.target.value.length) {
-//         e.target.selectionStart = e.target.value.length;
-//     }
-// }
-// };
-
-// document.body.ontouchend = (e) => {
-//     if (e.target.id !== "reset") {
-//         if (e.target.tagName === "INPUT" || e.target.tagName === "BUTTON") {
-//             if (vars.bill && vars.people && vars.percent) {
-//                 calcTip();
-//             }
-//         }
-//     }
-// };
+document.body.onkeyup = (e) => {
+    if(e.target.tagName === "INPUT") {
+        if (vars.bill && vars.people && vars.percent) {
+            calcTip();
+        }
+    }
+}
 
 billInput.onmousedown = (e) => {
     e.target.style.caretColor = "transparent";
@@ -42,21 +31,15 @@ billInput.onmouseup = (e) => {
 };
 
 billInput.onfocus = (e) => {
-    inputState(e, 6, 3);
-};
-
-billInput.onblur = () => {
-    vars.keyPress = [];
+    inputState(e, 5, 2);
 };
 
 billInput.onkeydown = (e) => {
-    validInput(e, 6);
-
-    e.target.style.backgroundColor = "red";
+    validInput(e);
 
     if (e.key === "Enter") {
         if (vars.index !== 1) {
-            tipBtns.children[index].focus();
+            tipBtns.children[vars.index].focus();
         } else {
             tipBtns.children[1].focus();
         }
@@ -66,9 +49,9 @@ billInput.onkeydown = (e) => {
 billInput.onkeyup = (e) => {
     vars.bill = e.target.value;
 
-    e.target.style.backgroundColor = "red";
+    inputState(e, 5, 2);
 
-    if (vars.bill < 0.01 && vars.keyPress.length !== 0) {
+    if (vars.bill < 0.01 && vars.inputValue.length !== 0) {
         cantBeZeroBill.className = "active";
         billInput.className = "active";
         cantBeZeroBill.setAttribute("aria-live", "assertive");
@@ -76,10 +59,6 @@ billInput.onkeyup = (e) => {
         cantBeZeroBill.className = "inactive";
         billInput.className = "inactive";
         cantBeZeroBill.removeAttribute("aria-live");
-    }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
     }
 };
 
@@ -100,6 +79,10 @@ tipBtns.onkeyup = (e) => {
 
 tipBtns.onclick = (e) => {
     btnState(e);
+    
+    if (vars.bill && vars.people && vars.percent) {
+        calcTip();
+    }
 };
 
 tipBtns.onfocus = (e) => {
@@ -115,26 +98,19 @@ custom.onmouseup = (e) => {
 };
 
 custom.onfocus = (e) => {
-    inputState(e, 3, 3);
-};
-
-custom.onblur = () => {
-    vars.keyPress = [];
+    inputState(e, 2, 2);
 };
 
 custom.onkeydown = (e) => {
     if (e.key === "Enter") {
         peopleInput.focus();
     }
-    validInput(e, 3);
+    validInput(e);
 };
 
 custom.onkeyup = (e) => {
+    inputState(e, 2, 2);
     vars.percent = e.target.value;
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
-    }
 };
 
 peopleInput.onmousedown = (e) => {
@@ -146,18 +122,14 @@ peopleInput.onmouseup = (e) => {
 };
 
 peopleInput.onfocus = (e) => {
-    inputState(e, 3, 0);
-};
-
-peopleInput.onblur = () => {
-    vars.keyPress = [];
+    inputState(e, 2, 0);
 };
 
 peopleInput.onkeydown = (e) => {
     if (e.key === ".") {
         e.preventDefault();
     } else {
-        validInput(e, 3);
+        validInput(e);
     }
 
     if (e.shiftKey && e.key === "Tab") {
@@ -174,6 +146,8 @@ peopleInput.onkeydown = (e) => {
 };
 
 peopleInput.onkeyup = (e) => {
+    inputState(e, 2, 0);
+
     vars.people = e.target.value;
 
     if (e.shiftKey && e.key === "Tab") {
@@ -189,10 +163,6 @@ peopleInput.onkeyup = (e) => {
         cantBeZeroPeople.className = "inactive";
         peopleInput.className = "inactive";
         cantBeZeroPeople.removeAttribute("aria-live");
-    }
-
-    if (vars.bill && vars.people && vars.percent) {
-        calcTip();
     }
 };
 

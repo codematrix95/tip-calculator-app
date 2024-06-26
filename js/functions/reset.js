@@ -8,8 +8,6 @@ import {
 } from "../ids+variables/getId.js";
 
 export const reset = () => {
-    vars.keyPress = [];
-
     tipTotal.textContent = "$0.00";
     peopleTotal.textContent = "$0.00";
     billInput.value = "";

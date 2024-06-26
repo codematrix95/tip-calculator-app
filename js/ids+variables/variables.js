@@ -1,5 +1,5 @@
 export const vars = {
-    // calcTip variables to calculate tip inside of tipCalc function
+    // calcTip variables to calculate tip and total
     bill: undefined,
     people: undefined,
     percent: 0,
@@ -14,12 +14,17 @@ export const vars = {
     activeBtn: undefined,
     index: 1,
 
-    // used for inputState & isValid functions
-    isLastCharDec: false,
-    isValid: /\d|\./,
-    isDec: /\./,
-    maxLength: undefined,
-    keyPress: [],
+    // these variables are used for inputState and validInput functions
+    isValid: /\d|\./, // the only values that can be entered inside of the input are digits and 1 decimal
+    isDec: /\./, // used to check if there is a decimal
+    maxLength: undefined, // restricts the amount that can be entered inside of the input field
+    inputValue: [], // stores the value of the input
+    keyPressed: [], // this is only used to prevent repeated keys and multiple key presses exceeding the maximum length (refer to validInput.js function)
+
+    caretPos: undefined, // tracks caret position inside of input
+    indexOfDec: undefined, // stores the index of the decimal
+    decArr: [], // stores the decimal and numbers that come after the decimal
+    intArr: [], // stores numbers that come before the decimal
 
     // used for resizeText function
     fontSizesL: ["48px", "36px", "32px", "28px"],
@@ -31,4 +36,7 @@ export const vars = {
 export const validKey = {
     Tab: null,
     Enter: null,
+    ArrowLeft: null,
+    ArrowRight: null,
+    Backspace: null,
 };
