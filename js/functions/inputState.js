@@ -35,6 +35,7 @@ export const inputState = (e, intPlaces, decPlaces) => {
 
         if (e.key === "Backspace") {
             vars.decArr = [];
+            vars.intArr = vars.inputValue.slice(0, vars.indexOfDec);
             e.target.value = vars.intArr.join("");
             vars.keyPressed = [...e.target.value];
         }

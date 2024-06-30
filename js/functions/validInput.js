@@ -32,7 +32,6 @@ export const validInput = (e) => {
         if(e.key === ".") {
             vars.keyPressed.push(e.key)
         }
-
         if (e.key in validKey || e.key === ".") {
             true;
         } else {

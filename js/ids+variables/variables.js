@@ -9,10 +9,10 @@ export const vars = {
     tip: undefined,
     totalPerPerson: undefined,
 
-    // tipBtns
-    prevBtn: [],
+    // theses variables are used to keep track of the state of the buttons
+    prevBtn: [], 
     activeBtn: undefined,
-    index: 1,
+    index: 1, // this is used for tabbing to the correct button see line 40 and line 135 in main.js
 
     // these variables are used for inputState and validInput functions
     isValid: /\d|\./, // the only values that can be entered inside of the input are digits and 1 decimal
