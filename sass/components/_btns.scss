@@ -2,15 +2,21 @@
     display: grid;
     gap: 16px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 0fr 1fr 1fr 1fr;
+    margin-bottom: 24px;
+
     @include tablet {
         gap: 10px;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 0fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
     }
     @include desktop {
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: 0fr 1fr 1fr;
         grid-template-columns: 1fr 1fr 1fr;
+        margin-bottom: 42px;
+    }
+    legend {
+        grid-column: 1 / -1;
     }
     button {
         border: none;
@@ -20,6 +26,7 @@
         &.inactive {
             background-color: $verydarkcyan;
             color: $white;
+
             &:hover {
                 cursor: pointer;
                 background-color: $lightstrongcyan;

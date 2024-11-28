@@ -1,32 +1,29 @@
 .grid-1 {
     display: grid;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 1fr 4fr;
     height: 100vh;
     @include tablet {
         grid-template-rows: 1fr 1fr 1fr;
     }
-    @include desktop {
-        grid-template-columns: 1.25fr 4fr 1.25fr;
-        grid-template-rows: 1.5fr 2fr 1.25fr;
-    }
 
-    h1 {
+    #splitter {
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 155px;
         @include tablet {
-            align-items: end;
+            @media (min-height: 1000px) {
+                align-items: end;
+            }
         }
-        @include desktop {
-            align-items: end;
-            grid-column: 2;
-        }
+
         img {
             height: 3.25rem;
-            padding-bottom: 0px;
+            margin-bottom: 0px;
             @include tablet {
-                padding-bottom: 90px;
+                @media (min-height: 1000px) {
+                    margin-bottom: 90px;
+                }
             }
         }
     }
